@@ -20,6 +20,9 @@
                  [metosin/ring-http-response "0.9.0"]
                  [metosin/muuntaja "0.5.0"]
                  [metosin/jsonista "0.1.1"]
+                 [metosin/reitit "0.1.1-SNAPSHOT"]
+                 [metosin/reitit-ring "0.1.1-SNAPSHOT"]
+                 [metosin/reitit-schema "0.1.1-SNAPSHOT"]
 
                  ; HTTP and HTML
                  [clj-http "3.8.0"]

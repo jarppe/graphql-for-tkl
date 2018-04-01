@@ -1,18 +1,12 @@
-enum Episode {
-  NEWHOPE
-  EMPIRE
-  JEDI
-}
-
-type Character {
+type Line {
   id: ID!
   name: String!
-  episodes: [Episode!]!
+  description: String!
+  url: String!
 }
 
 type Query {
-  character(id: ID!) : Character
-  characters(episode: Episode!) : [Character!]!
+  line(id: ID!) : Line
 }
 
 schema {
