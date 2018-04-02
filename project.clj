@@ -56,7 +56,7 @@
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src/cljs"]
                         :figwheel true
-                        :compiler {:main "frontend.main"
+                        :compiler {:main "app.front.main"
                                    :asset-path "asset/js/out"
                                    :external-config {:devtools/config {:features-to-install :all}}
                                    :closure-defines {goog.DEBUG true}
@@ -69,7 +69,7 @@
                                    :pretty-print true}}
                        {:id "prod"
                         :source-paths ["src/cljc" "src/cljs"]
-                        :compiler {:main "frontend.main"
+                        :compiler {:main "app.front.main"
                                    :optimizations :advanced
                                    :output-to "target/prod/resources/public/js/main.js"
                                    :output-dir "target/prod/resources/public/js/out"
