@@ -1,10 +1,10 @@
-(ns backend.gql.core
+(ns app.gql.core
   (:require [clojure.java.io :as io]
             [com.walmartlabs.lacinia :as gql]
             [com.walmartlabs.lacinia.schema :as gql.schema]
             [com.walmartlabs.lacinia.parser.schema :as gql.parse]
             [com.walmartlabs.lacinia.util :as gql.util]
-            [backend.journey.api :as journey]))
+            [app.journey.api :as journey]))
 
 (defn wrap-in-map [schema-str]
   (str "{

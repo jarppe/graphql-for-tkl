@@ -1,6 +1,9 @@
 (defproject jarppe/graphql-for-tkl "0.0.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.9.0"]
 
+                 ; Syksy
+                 [jarppe/syksy "0.0.0-SNAPSHOT"]
+
                  ; Common stuff:
                  [org.clojure/core.async "0.4.474"]
                  [prismatic/schema "1.1.9"]
@@ -8,44 +11,25 @@
 
                  ; GraphQL:
                  [com.walmartlabs/lacinia "0.25.0"]
+                 [vincit/venia "0.2.5"]
+                 [locksmith "0.1.0-SNAPSHOT"]
 
-                 ; Integrant:
-                 [integrant "0.6.3"]
-                 [integrant/repl "0.3.1"]
-
-                 ; Web:
-                 [org.immutant/web "2.1.10"]
-                 [ring/ring-core "1.6.3" :exclusions [commons-io]]
-                 [ring/ring-defaults "0.3.1"]
-                 [metosin/ring-http-response "0.9.0"]
-                 [metosin/muuntaja "0.5.0"]
-                 [metosin/jsonista "0.1.1"]
                  [metosin/reitit "0.1.1-SNAPSHOT"]
                  [metosin/reitit-ring "0.1.1-SNAPSHOT"]
                  [metosin/reitit-schema "0.1.1-SNAPSHOT"]
 
                  ; HTTP and HTML
                  [clj-http "3.8.0"]
-                 [hiccup "2.0.0-alpha1"]
-                 [enlive "1.1.6"]
 
                  ; ClojureScript:
                  [org.clojure/clojurescript "1.10.238"]
                  [binaryage/devtools "0.9.9"]
                  [metosin/reagent-dev-tools "0.2.0"]
                  [reagent "0.8.0-alpha2"]
-                 [cljs-http "0.1.44"]
+                 [cljs-http "0.1.44"]]
 
-                 ; Logging:
-                 [org.clojure/tools.logging "0.4.0"]
-                 [org.slf4j/jcl-over-slf4j "1.7.25"]
-                 [org.slf4j/jul-to-slf4j "1.7.25"]
-                 [org.slf4j/log4j-over-slf4j "1.7.25"]
-                 [ch.qos.logback/logback-classic "1.2.3" :exclusions [org.slf4j/slf4j-api]]]
-
-  :source-paths ["src/dev" "src/clj" "src/cljs"]
+  :source-paths ["src/clj" "src/cljs"]
   :test-paths ["test/clj"]
-  :java-source-paths ["src/java"]
   :auto-clean false
 
   :sass {:source-paths ["src/sass"]
@@ -65,15 +49,15 @@
              :prod {:source-paths ^:replace ["src/clj" "src/cljs"]
                     :resource-paths ["target/prod/resources"]
                     :sass {:target-path "target/prod/resources/public/css"}}
-             :uberjar {:main backend.main
-                       :aot [backend.main]
+             :uberjar {:main syksy.main
+                       :aot [syksy.main]
                        :uberjar-name "app.jar"}}
 
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src/cljs"]
                         :figwheel true
                         :compiler {:main "frontend.main"
-                                   :asset-path "js/out"
+                                   :asset-path "asset/js/out"
                                    :external-config {:devtools/config {:features-to-install :all}}
                                    :closure-defines {goog.DEBUG true}
                                    :preloads [devtools.preload]
@@ -98,4 +82,3 @@
                     ["sass4clj" "once"]
                     ["cljsbuild" "once" "prod"]
                     "uberjar"]})
-

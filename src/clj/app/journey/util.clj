@@ -1,4 +1,4 @@
-(ns backend.journey.util
+(ns app.journey.util
   (:require [clojure.string :as str]
             [jsonista.core :as json]
             [clj-http.client :as http]))

@@ -1,5 +1,5 @@
-(ns backend.journey.api
-  (:require [backend.journey.util :as u]))
+(ns app.journey.api
+  (:require [app.journey.util :as u]))
 
 ;;
 ;; Journey API:
