@@ -2,7 +2,7 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
 
                  ; Syksy:
-                 [jarppe/syksy "0.0.2"]
+                 [jarppe/syksy "0.0.3-SNAPSHOT"]
 
                  ; Common stuff:
                  [org.clojure/core.async "0.4.474"]
@@ -19,6 +19,9 @@
 
                  ; HTTP and HTML
                  [clj-http "3.8.0"]
+
+                 ; nrepl:
+                 [org.clojure/tools.nrepl "0.2.13"]
 
                  ; ClojureScript:
                  [org.clojure/clojurescript "1.10.238"]
@@ -77,10 +80,13 @@
                                    :output-to "target/prod/resources/public/js/main.js"
                                    :closure-defines {goog.DEBUG false}}}]}
 
-  :aliases {"dev" ["do" "clean"
-                   ["pdo" ["sass4clj" "auto"] ["figwheel"]]]
-            "prod" ["with-profile" "uberjar" "do"
-                    ["clean"]
-                    ["sass4clj" "once"]
-                    ["cljsbuild" "once" "prod"]
-                    ["uberjar"]]})
+  :aliases {"dev" ["do"
+                   ["clean"]
+                   ["pdo"
+                    ["sass4clj" "auto"]
+                    ["figwheel"]]]
+            "uberjar" ["with-profile" "uberjar" "do"
+                       ["clean"]
+                       ["sass4clj" "once"]
+                       ["cljsbuild" "once" "prod"]
+                       ["uberjar"]]})
