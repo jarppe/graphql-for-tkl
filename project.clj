@@ -27,6 +27,7 @@
                  [reagent "0.8.0-alpha2"]
                  [cljs-http "0.1.45"]]
 
+  :min-lein-version "2.8.1"
   :source-paths ["src/clj" "src/cljs"]
   :test-paths ["test/clj"]
   :auto-clean false
