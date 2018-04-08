@@ -4,5 +4,6 @@
             [app.gql.handler :as graphql]))
 
 (defn components []
-  (syksy/default-components {:index-body (index/index {:title "GraphQL API for TKL"})
-                             :routes graphql/handler}))
+  (syksy/default-components
+    {:index-body (index/index {:title "GraphQL API for TKL Journey API"})
+     :routes graphql/handler}))

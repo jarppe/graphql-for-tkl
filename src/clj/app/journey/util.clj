@@ -1,28 +1,35 @@
 (ns app.journey.util
   (:require [clojure.string :as str]
-            [jsonista.core :as json]
-            [clj-http.client :as http]))
+            [clj-http.client :as http]
+            [jsonista.core :as json]))
 
-(def mapper (json/object-mapper {:decode-key-fn keyword}))
+(def ^:private mapper (json/object-mapper {:decode-key-fn keyword}))
 
-(defn ok! [{:keys [status] :as response}]
+(defn- assert-ok! [{:keys [status] :as response}]
   (when-not (= status 200)
-    (throw (ex-info (str "HTTP fail: " status) {})))
+    (throw (ex-info (str "HTTP fail: " status) {:response response})))
   response)
 
-(defn success! [{:keys [status] :as response}]
+(defn- assert-success! [{:keys [status] :as response}]
   (when-not (= status "success")
-    (throw (ex-info (str "API fail: " status) {})))
+    (throw (ex-info (str "API fail: " status) {:response response})))
   response)
 
-(defn GET [& uri]
-  (-> (str/join "/" (cons "http://data.itsfactory.fi/journeys/api/1" uri))
-      (http/get {:accept :json})
-      (ok!)
-      :body
-      (json/read-value mapper)
-      (success!)
-      :body))
+(def ^:private +journey-url+ "http://data.itsfactory.fi/journeys/api/1/")
+(def ^:private +default-opts+ {:accept :json
+                               :throw-exceptions false})
 
-(defn name-as-id [{:keys [name] :as entity}]
-  (assoc entity :id name))
+(defn GET [url params exclude-fields]
+  (let [query-params (assoc params :exclude-fields (->> exclude-fields
+                                                        (map name)
+                                                        (str/join ",")))
+        opts (assoc +default-opts+ :query-params query-params)]
+    (-> (http/get (str +journey-url+ url) opts)
+        (assert-ok!)
+        :body
+        (json/read-value mapper)
+        (assert-success!)
+        :body)))
+
+(defn url->id [url]
+  (second (re-matches #".*\/(\d+)" url)))
