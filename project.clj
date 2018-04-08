@@ -30,6 +30,7 @@
   :min-lein-version "2.8.1"
   :source-paths ["src/clj" "src/cljs"]
   :test-paths ["test/clj"]
+  :target-path "target/dev"
   :auto-clean false
 
   :sass {:source-paths ["src/sass"]
@@ -47,7 +48,8 @@
   :profiles {:dev {:dependencies [[metosin/testit "0.2.1"]]
                    :resource-paths ["target/dev/resources"]
                    :sass {:target-path "target/dev/resources/public/css"}}
-             :uberjar {:source-paths ^:replace ["src/clj" "src/cljs"]
+             :uberjar {:target-path "target/prod"
+                       :source-paths ^:replace ["src/clj" "src/cljs"]
                        :resource-paths ["target/prod/resources"]
                        :sass {:target-path "target/prod/resources/public/css"}
                        :main syksy.main
@@ -73,7 +75,6 @@
                         :compiler {:main "app.front.main"
                                    :optimizations :advanced
                                    :output-to "target/prod/resources/public/js/main.js"
-                                   :output-dir "target/prod/resources/public/js/out"
                                    :closure-defines {goog.DEBUG false}}}]}
 
   :aliases {"dev" ["do" "clean"
