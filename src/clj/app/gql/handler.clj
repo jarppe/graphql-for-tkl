@@ -17,10 +17,6 @@
                               (s/optional-key :errors) [s/Any]})
 
 (defn execute [req]
-  (log/debugf "graphql: query=%s, variables=%s, op-name=%s"
-              (-> req :gql :query pr-str)
-              (-> req :gql :variables pr-str)
-              (-> req :gql :operationName))
   (gql/execute schema/schema
                (-> req :gql :query)
                (-> req :gql :variables)
