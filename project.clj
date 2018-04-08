@@ -51,7 +51,7 @@
                        :resource-paths ["target/prod/resources"]
                        :sass {:target-path "target/prod/resources/public/css"}
                        :main syksy.main
-                       :aot :all
+                       :aot [syksy.main app.components]
                        :uberjar-name "app.jar"}}
 
   :cljsbuild {:builds [{:id "dev"
