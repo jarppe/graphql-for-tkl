@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -cp target/app.jar
+web: java $JVM_OPTS -jar target/app.jar
