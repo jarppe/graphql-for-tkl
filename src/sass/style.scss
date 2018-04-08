@@ -10,12 +10,52 @@ html, body, #app {
 }
 
 body {
-  background: #333;
-  color: #ccc;
+  background: #e1e1e1;
+  color: #1e1e1e;
   font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
 }
 
-h1 {
-  padding: 3rem;
+a, a:visited {
+  color: black;
+  border-bottom: dashed 1px #919191;
+  text-decoration: none;
+  transition: border-bottom 0.5s;
+}
+
+a:hover {
+  border-bottom: solid 1px black;
+}
+
+#app {
+  max-width: 780px;
   margin: auto;
+}
+
+h1 {
+  font-size: 34px;
+  padding-top: 2rem;
+}
+
+.info {
+  font-size: 22px;
+  margin-top: 2rem;
+  div {
+    padding-bottom: 1rem;
+  }
+}
+
+.links {
+  font-size: 22px;
+  margin-top: 1rem;
+  table {
+    margin: 0.5rem 0 0 0.5rem;
+    td:first-child {
+      padding-right: 0.5rem;
+    }
+  }
+}
+
+.copy {
+  font-size: 18px;
+  margin: 1rem 0 2rem 0;
 }
