@@ -10,7 +10,7 @@
             [app.gql.schema :as schema]))
 
 (s/defschema GraphQLRequest {:query s/Str
-                             (s/optional-key :variables) (s/maybe s/Str)
+                             (s/optional-key :variables) (s/maybe {s/Keyword s/Any})
                              (s/optional-key :operationName) (s/maybe s/Str)})
 
 (s/defschema GraphQLResponse {(s/optional-key :data) s/Any
