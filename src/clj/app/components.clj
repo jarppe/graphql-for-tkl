@@ -19,7 +19,7 @@
                                                   (ig/ref [::redirect/handler ::app])]})
       ; Serve "/graphiql/" resources under /resources/graphiql and
       ; redirect "/graphiql" and "/graphiql/" -> "/graphiql/index.html"
-      {[::server/server ::syksy/syksy] {:port port}
+      {[::server/server ::syksy/syksy] {:port port, :host "0.0.0.0"}
        [::resources/handler ::app] {:asset-prefix "/graphiql/"
                                     :asset-dir "graphiql/"}
        [::redirect/handler ::app] {:from (comp #{"/graphiql" "/graphiql/"} :uri)
