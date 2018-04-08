@@ -1,5 +1,6 @@
 (ns app.gql.handler
-  (:require [ring.util.http-response :as resp]
+  (:require [clojure.tools.logging :as log]
+            [ring.util.http-response :as resp]
             [com.walmartlabs.lacinia :as gql]
             [schema.core :as s]
             [reitit.core :as r]
@@ -8,16 +9,22 @@
             [reitit.ring.coercion :as rrc]
             [app.gql.schema :as schema]))
 
-(s/defschema GraphQLRequest {:query s/Str})
+(s/defschema GraphQLRequest {:query s/Str
+                             (s/optional-key :variables) (s/maybe s/Str)
+                             (s/optional-key :operationName) (s/maybe s/Str)})
 
 (s/defschema GraphQLResponse {(s/optional-key :data) s/Any
                               (s/optional-key :errors) [s/Any]})
 
 (defn execute [req]
+  (log/debugf "graphql: query=%s, variables=%s, op-name=%s"
+              (-> req :gql :query pr-str)
+              (-> req :gql :variables pr-str)
+              (-> req :gql :operationName))
   (gql/execute schema/schema
                (-> req :gql :query)
-               nil
-               nil))
+               (-> req :gql :variables)
+               (-> req :ctx)))
 
 (defn gql-get [req]
   (assoc req :gql (-> req :parameters :query)))
